@@ -55,7 +55,9 @@ int main(int argc, char *argv[]) {
     for (int j = 0; j < People.size(); ++j) {
         pain << "{ \"name\": \"" << People[j].name << "\", \"age\": " << People[j].age << "}";
         if (j != People.size() - 1) {
-            pain << ","
+            pain << ", "
+        }else{
+
         }
     }
     pain.close();
