@@ -20,14 +20,6 @@ bool sort_name(Student &left, Student &right) {
     return left.name < right.name;
 }
 
-void Ludi_V_Pravilnom_Poryadke(vector<Student> &People) {
-    sort(People.begin(), People.end(), sort_name);
-}
-
-void Ludi_Po_Starosti(vector<Student> &People) {
-    sort(People.begin(), People.end(), sort_age);
-}
-
 int main(int argc, char *argv[]) {
     vector<Student> People;
     for (int i = 1; i < argc; ++i) {
@@ -48,17 +40,29 @@ int main(int argc, char *argv[]) {
         }
     }
     ofstream pain;
-    pain.open("sorted.json.txt");
+    pain.open("sorted.json");
     pain << "{" << endl;
-    pain << '\t' << '\"' << "sorted_by_name_gt" << '\"' << " : [";
-    Ludi_V_Pravilnom_Poryadke(People);
+    pain << "\t\"sorted_by_name_gt\" : [";
+    sort(People.begin(), People.end(), sort_name);
     for (int j = 0; j < People.size(); ++j) {
-        pain << "{ \"name\": \"" << People[j].name << "\", \"age\": " << People[j].age << "}";
+        pain << "{\"name\": \"" << People[j].name << "\", \"age\": " << People[j].age << "}";
         if (j != People.size() - 1) {
-            pain << ", "
-        }else{
+            pain << ", ";
+        } else {
+            pain << "]," << endl;
         }
     }
+    pain << "\t\"sorted_by_age_less\" : [";
+    sort(People.begin(), People.end(), sort_age);
+    for (int j = 0; j < People.size(); ++j) {
+        pain << "{\"name\": \"" << People[j].name << "\", \"age\": " << People[j].age << "}";
+        if (j != People.size() - 1) {
+            pain << ", ";
+        } else {
+            pain << "]" << endl;
+        }
+    }
+    pain << "}";
     pain.close();
     return 0;
 }
