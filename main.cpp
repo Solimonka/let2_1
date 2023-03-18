@@ -57,7 +57,6 @@ int main(int argc, char *argv[]) {
         if (j != People.size() - 1) {
             pain << ", "
         }else{
-
         }
     }
     pain.close();
