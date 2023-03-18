@@ -65,5 +65,4 @@ int main(int argc, char *argv[]) {
     pain << "}";
     pain.close();
     return 0;
-
 }
